@@ -1,0 +1,71 @@
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 4px 12px
+    rgba(0, 0, 0, 0.08);
+}
+
+.jobTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.company {
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.info {
+  margin-bottom: 10px;
+  color: #374151;
+}
+
+.message {
+  margin-top: 15px;
+
+  background: #f9fafb;
+
+  padding: 15px;
+
+  border-radius: 10px;
+}
+
+.deleteBtn {
+  margin-top: 20px;
+
+  border: none;
+
+  background: #ef4444;
+
+  color: white;
+
+  padding: 12px 18px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.deleteBtn:hover {
+  opacity: 0.9;
+}

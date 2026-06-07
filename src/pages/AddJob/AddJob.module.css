@@ -1,0 +1,113 @@
+.addJob {
+  padding: 60px 0 100px;
+}
+
+.container {
+  max-width: 900px;
+
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.top {
+  margin-bottom: 40px;
+}
+
+.top h1 {
+  font-size: 48px;
+
+  margin-bottom: 10px;
+}
+
+.top p {
+  color: var(--gray-color);
+
+  font-size: 18px;
+}
+
+.form {
+  background-color: white;
+
+  border-radius: 24px;
+
+  border: 1px solid #e5e7eb;
+
+  padding: 40px;
+}
+
+.group {
+  margin-bottom: 28px;
+}
+
+.group label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.group input,
+.group select,
+.group textarea {
+  width: 100%;
+
+  border-radius: 14px;
+
+  border: 1px solid #d1d5db;
+
+  padding: 16px;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: var(--transition);
+}
+
+.group input,
+.group select {
+  height: 58px;
+}
+
+.group textarea {
+  resize: vertical;
+}
+
+.group input:focus,
+.group select:focus,
+.group textarea:focus {
+  border-color: var(--primary-color);
+}
+
+.row {
+  display: flex;
+
+  gap: 20px;
+}
+
+.row .group {
+  flex: 1;
+}
+
+.submitBtn {
+  width: 100%;
+
+  height: 60px;
+
+  border-radius: 16px;
+
+  background-color: var(--primary-color);
+
+  color: white;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  transition: var(--transition);
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+}

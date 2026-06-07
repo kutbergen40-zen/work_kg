@@ -1,0 +1,15 @@
+.breadcrumbs {
+  margin-bottom: 25px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+.breadcrumbs span:last-child {
+  color: #111827;
+
+  font-weight: 600;
+}

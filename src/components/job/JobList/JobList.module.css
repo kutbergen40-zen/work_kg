@@ -1,0 +1,200 @@
+.wrapper {
+  width: 100%;
+}
+
+/* EMPTY */
+.empty {
+  background-color: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 28px;
+
+  padding: 80px 30px;
+
+  text-align: center;
+}
+
+.empty h2 {
+  font-size: 38px;
+
+  margin-bottom: 16px;
+}
+
+.empty p {
+  color: var(--gray-color);
+
+  font-size: 17px;
+}
+
+/* TOP */
+.categoryTop {
+  margin-bottom: 35px;
+}
+
+.categoryTop h2 {
+  font-size: 42px;
+
+  margin-bottom: 12px;
+}
+
+.categoryTop p {
+  color: var(--gray-color);
+
+  font-size: 17px;
+}
+
+/* JOBS GRID */
+.jobsGrid {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  margin-bottom: 45px;
+}
+
+.jobBtn {
+  padding: 16px 22px;
+
+  border-radius: 18px;
+
+  background-color: white;
+
+  border: 1px solid #e5e7eb;
+
+  font-weight: 500;
+
+  transition: var(--transition);
+}
+
+.jobBtn:hover {
+  border-color: var(--primary-color);
+
+  color: var(--primary-color);
+}
+
+.active {
+  background-color: var(--primary-color);
+
+  color: white;
+
+  border-color: var(--primary-color);
+}
+
+.cards {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+
+  width: 100%;
+}
+
+.cards h2,
+.cards h3,
+.noJobs {
+  grid-column: 1 / -1;
+}
+
+.cards h3 {
+  font-size: 30px;
+
+  margin-bottom: 10px;
+}
+
+.cards h3 span {
+  color: var(--primary-color);
+
+  margin-left: 10px;
+}
+
+/* ADAPTIVE */
+@media (max-width: 700px) {
+  .categoryTop h2 {
+    font-size: 32px;
+  }
+
+  .empty h2 {
+    font-size: 28px;
+  }
+
+  .cards h3 {
+    font-size: 24px;
+  }
+
+  .jobBtn {
+    width: 100%;
+  }
+}
+.noJobs {
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 40px;
+
+  text-align: center;
+
+  font-size: 18px;
+
+  color: #6b7280;
+
+  border: 1px solid #e5e7eb;
+}
+
+.cards h2 {
+  font-size: 36px;
+
+  margin-bottom: 25px;
+}
+
+@media (max-width: 700px) {
+  .cards {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .cards h3 {
+    font-size: 18px;
+  }
+
+  .jobBtn {
+    width: 100%;
+
+    padding: 10px;
+
+    font-size: 12px;
+  }
+
+  .categoryTop h2 {
+    font-size: 22px;
+  }
+
+  .categoryTop p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .jobsGrid {
+    display: grid;
+
+    grid-auto-flow: column;
+
+    grid-template-rows: repeat(2, 1fr);
+
+    grid-auto-columns: 140px;
+
+    overflow-x: auto;
+
+    gap: 10px;
+  }
+
+  .jobBtn {
+    width: 100%;
+  }
+}

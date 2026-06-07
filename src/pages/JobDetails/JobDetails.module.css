@@ -1,0 +1,254 @@
+.jobDetails {
+  padding: 60px 0 100px;
+}
+
+.container {
+  max-width: 1300px;
+
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content {
+  display: grid;
+
+  grid-template-columns: 2fr 1fr;
+
+  gap: 30px;
+}
+
+/* LEFT */
+.left {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 25px;
+}
+
+/* CARD */
+.topCard,
+.block,
+.contactCard,
+.companyCard {
+  background-color: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 28px;
+
+  padding: 35px;
+}
+
+.topCard {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.category {
+  display: inline-block;
+
+  padding: 10px 18px;
+
+  border-radius: 30px;
+
+  background-color: #eef2ff;
+
+  color: var(--primary-color);
+
+  font-weight: 600;
+
+  margin-bottom: 18px;
+}
+
+.topCard h1 {
+  font-size: 42px;
+
+  margin-bottom: 15px;
+}
+
+.company {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: var(--gray-color);
+}
+
+.topCard button {
+  width: 56px;
+  height: 56px;
+
+  border-radius: 18px;
+
+  background-color: #f3f4f6;
+
+  color: var(--primary-color);
+
+  font-size: 20px;
+}
+
+/* INFO */
+.infoGrid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+.infoGrid div {
+  background-color: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 22px;
+
+  padding: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  font-weight: 600;
+}
+
+.infoGrid svg {
+  color: var(--primary-color);
+
+  font-size: 20px;
+}
+
+/* BLOCK */
+.block h2 {
+  font-size: 28px;
+
+  margin-bottom: 20px;
+}
+
+.block p {
+  line-height: 1.9;
+
+  color: var(--gray-color);
+}
+
+.block ul {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.block li {
+  line-height: 1.8;
+
+  color: var(--gray-color);
+}
+
+/* RIGHT */
+.right {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 25px;
+}
+
+/* CONTACT */
+.contactCard h3,
+.companyCard h3 {
+  font-size: 26px;
+
+  margin-bottom: 25px;
+}
+
+.contactCard {
+  position: sticky;
+
+  top: 120px;
+}
+
+.contactCard a {
+  height: 58px;
+
+  border-radius: 18px;
+
+  background-color: #f3f4f6;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 0 18px;
+
+  margin-bottom: 16px;
+
+  color: #111827;
+
+  font-weight: 500;
+}
+
+.contactCard button {
+  width: 100%;
+
+  height: 60px;
+
+  border-radius: 18px;
+
+  background-color: var(--primary-color);
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  margin-top: 15px;
+}
+
+.companyCard p {
+  line-height: 1.8;
+
+  color: var(--gray-color);
+}
+
+/* ADAPTIVE */
+@media (max-width: 1000px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .contactCard {
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .topCard {
+    flex-direction: column;
+  }
+
+  .topCard h1 {
+    font-size: 32px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .block,
+  .topCard,
+  .contactCard,
+  .companyCard {
+    padding: 25px;
+  }
+}

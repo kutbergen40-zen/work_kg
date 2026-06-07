@@ -1,0 +1,198 @@
+.footer {
+  margin-top: 120px;
+
+  background-color: #111827;
+
+  color: white;
+}
+
+.container {
+  max-width: 1300px;
+
+  margin: 0 auto;
+  padding: 80px 20px;
+
+  display: grid;
+
+  grid-template-columns: 1.4fr 1fr 1fr;
+
+  gap: 60px;
+}
+
+/* COLUMN */
+.column h3 {
+  font-size: 24px;
+
+  margin-bottom: 25px;
+}
+
+/* LOGO */
+.logo {
+  font-size: 42px;
+
+  margin-bottom: 20px;
+
+  color: white;
+}
+
+.description {
+  line-height: 1.9;
+
+  color: #9ca3af;
+
+  margin-bottom: 30px;
+
+  max-width: 340px;
+}
+
+/* LINKS */
+.links {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.links a {
+  color: #d1d5db;
+
+  transition: var(--transition);
+}
+
+.links a:hover {
+  color: white;
+
+  transform: translateX(5px);
+}
+
+/* CONTACTS */
+.contacts {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.contacts p {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #d1d5db;
+
+  line-height: 1.7;
+}
+
+.contacts svg {
+  color: var(--primary-color);
+}
+
+/* SOCIALS */
+.socials {
+  display: flex;
+
+  gap: 14px;
+}
+
+.socials a {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 16px;
+
+  background-color: #1f2937;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-size: 18px;
+
+  transition: var(--transition);
+}
+
+.socials a:hover {
+  background-color: var(--primary-color);
+
+  transform: translateY(-4px);
+}
+
+/* BOTTOM */
+.bottom {
+  border-top: 1px solid #1f2937;
+
+  padding: 24px 20px;
+
+  text-align: center;
+
+  color: #9ca3af;
+}
+
+/* ADAPTIVE */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+  }
+
+  .logo {
+    font-size: 34px;
+  }
+
+  .column h3 {
+    font-size: 22px;
+  }
+}
+@media (max-width: 700px) {
+  .footer {
+    margin-top: 60px;
+  }
+
+  .container {
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 40px 15px;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .description {
+    max-width: 100%;
+  }
+
+  .socials a {
+    width: 42px;
+
+    height: 42px;
+  }
+}
+@media (max-width: 700px) {
+  .footer {
+    width: 100%;
+  }
+
+  .container {
+    padding: 40px 12px;
+  }
+
+  .logo {
+    font-size: 30px;
+  }
+}
