@@ -12,6 +12,7 @@ import Favorites from "./pages/Favorites/Favorites";
 import Applications from "./pages/Applications/Applications";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import PrivateRoute from "./components/common/PrivateRoute/PrivateRoute";
 
 function AppRoutes() {
   return (
@@ -24,7 +25,11 @@ function AppRoutes() {
          element={<Jobs />} />
 
         <Route path="/my-jobs"
-         element={<MyJobs />} />
+         element={
+         <PrivateRoute>
+         <MyJobs />
+         </PrivateRoute>
+         } />         
 
         <Route
           path="/job-details/:id"
@@ -33,18 +38,27 @@ function AppRoutes() {
 
         <Route
           path="/add-job"
-          element={<AddJob />}
-        />
+          element={
+          <PrivateRoute>
+            <AddJob />
+          </PrivateRoute>
+        }/>
 
         <Route
           path="/profile"
-          element={<Profile />}
-        />
+          element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        }/>
 
         <Route
           path="/edit-profile"
-          element={<EditProfile />}
-        />
+          element={
+          <PrivateRoute>
+            <EditProfile />
+          </PrivateRoute>
+        }/>
 
         <Route
           path="/favorites"
@@ -53,13 +67,19 @@ function AppRoutes() {
 
         <Route
           path="/my-responses"
-          element={<MyResponses />}
-        />
+          element={
+          <PrivateRoute>
+            <MyResponses />
+          </PrivateRoute>
+        }/>
 
         <Route
           path="/applications"
-          element={<Applications />}
-        />
+          element={
+          <PrivateRoute>
+            <Applications />
+          </PrivateRoute>
+        }/>
 
         <Route path="/login"
          element={<Login />} />

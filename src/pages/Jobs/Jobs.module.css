@@ -37,7 +37,6 @@
 
 .categoryBtn:hover {
   border-color: var(--primary-color);
-
   transform: translateY(-2px);
 }
 
@@ -69,4 +68,60 @@
 
     padding: 12px;
   }
+}
+
+@media (max-width: 700px) {
+  .content {
+    display: block;
+  }
+
+  .content aside {
+    display: none;
+  }
+
+  .modalOverlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(
+      0,
+      0,
+      0,
+      0.45
+    );
+
+    z-index: 3000;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+  }
+
+  .modal {
+    width: 100%;
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 24px 24px 0 0;
+
+    padding: 20px;
+  }
+
+  .modal aside {
+    display: block;
+    width: 100%;
+  }
+}
+
+.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
 }

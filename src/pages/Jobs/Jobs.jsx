@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Jobs.module.css";
 import JobSearch from "../../components/job/JobSearch/JobSearch";
 import JobFilter from "../../components/job/JobFilter/JobFilter";
@@ -8,10 +8,77 @@ import Breadcrumbs from "../../components/ui/Breadcrumbs/Breadcrumbs";
 import BackButton from "../../components/ui/BackButton/BackButton";
 
 function Jobs() {
-  const [selectedCategory, setSelectedCategory] =
-    useState(null);
-    const [search, setSearch] =
-  useState("");
+ const [
+  selectedCategory,
+  setSelectedCategory,
+] = useState(() => {
+  const saved =
+    localStorage.getItem(
+      "selectedCategory"
+    );
+
+  return saved
+    ? JSON.parse(saved)
+    : null;
+});
+
+const [search, setSearch] =
+  useState(() => {
+    return (
+      localStorage.getItem(
+        "search"
+      ) || ""
+    );
+  });
+
+  const [showFilter, setShowFilter] =
+  useState(false);
+
+const [filters, setFilters] =
+  useState(() => {
+    const saved =
+      localStorage.getItem(
+        "filters"
+      );
+
+    return saved
+      ? JSON.parse(saved)
+      : {
+          salaryFrom: "",
+          salaryTo: "",
+          experience:
+            "Любой",
+          schedule:
+            "Любой",
+          city:
+            "Все города",
+        };
+  });
+
+  useEffect(() => {
+  localStorage.setItem(
+    "selectedCategory",
+    JSON.stringify(
+      selectedCategory
+    )
+  );
+}, [selectedCategory]);
+
+useEffect(() => {
+  localStorage.setItem(
+    "search",
+    search
+  );
+}, [search]);
+
+useEffect(() => {
+  localStorage.setItem(
+    "filters",
+    JSON.stringify(
+      filters
+    )
+  );
+}, [filters]);
 
   const categories = [
     {
@@ -19,7 +86,8 @@ function Jobs() {
       title: "Отели, кафе, рестораны",
 
       jobs: [
-        "Шеф-повар / Су-шеф",
+        "Шеф-повар",
+        "Су-шеф",
         "Повар-универсал",
         "Повар холодного/горячего цеха",
         "Кондитер / Пекарь",
@@ -518,34 +586,65 @@ function Jobs() {
           <BackButton />
         <Breadcrumbs items={["Главная", "Вакансии"]} />
         <JobSearch
-           search={search}
-           setSearch={setSearch}
-         />
+          search={search}
+          setSearch={setSearch}
+          setShowFilter={setShowFilter}
+        />
 
-        <div className={styles.categories}>
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              className={styles.categoryBtn}
-              onClick={() =>
-                setSelectedCategory(category)
-              }
-            >
-              {category.title}
-            </button>
-          ))}
-        </div>
+      <div className={styles.categories}>
+  {categories.map((category) => (
+    <button
+      key={category.id}
+      // Добавляем вот эту проверку для класса active:
+      className={`${styles.categoryBtn} ${
+        selectedCategory?.id === category.id ? styles.active : ""
+      }`}
+      onClick={() => {
+        setSelectedCategory(category);
+        localStorage.removeItem("selectedJob");
+      }}
+    >
+      {category.title}
+    </button>
+  ))}
+</div>
 
         <div className={styles.content}>
-          <JobFilter />
+  <JobFilter
+  filters={filters}
+  setFilters={setFilters}
+/>
 
-          <JobList
+  <JobList
   selectedCategory={
     selectedCategory
   }
   search={search}
+  filters={filters}
 />
-        </div>
+  
+</div>
+
+{showFilter && (
+  <div
+    className={styles.modalOverlay}
+    onClick={() =>
+      setShowFilter(false)
+    }
+  >
+    <div
+      className={styles.modal}
+      onClick={(e) =>
+        e.stopPropagation()
+      }
+    >
+      <JobFilter
+  filters={filters}
+  setFilters={setFilters}
+/>
+    </div>
+  </div>
+)}
       </div>
     </section>
   );

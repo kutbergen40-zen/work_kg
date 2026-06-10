@@ -63,6 +63,14 @@ function Footer() {
               Избранное
             </Link>
 
+            <Link to="/my-jobs">
+              Мои вакансии
+            </Link>
+
+            <Link to="/my-responses">
+              Мои отклики
+            </Link>
+
             <Link to="/profile">
               Профиль
             </Link>

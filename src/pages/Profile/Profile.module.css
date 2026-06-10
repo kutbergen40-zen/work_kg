@@ -92,3 +92,44 @@
 
   background-color: #f3f4f6;
 }
+
+.buttons {
+  display: flex;
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+.editBtn,
+.logoutBtn {
+  border: none;
+
+  border-radius: 14px;
+
+  padding: 14px 22px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.editBtn {
+  background: var(--primary-color);
+
+  color: white;
+}
+
+.logoutBtn {
+  background: #ef4444;
+
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .buttons {
+    flex-direction: column;
+  }
+}

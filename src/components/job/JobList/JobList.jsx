@@ -1,152 +1,247 @@
+import { useState, useEffect } from "react";
+import { supabase } from "../../../lib/supabase";
 import styles from "./JobList.module.css";
-
-import { useState } from "react";
-
 import JobCard from "../JobCard/JobCard";
 
-import jobsData from "../../../data/jobsData";
+function JobList({ selectedCategory, search, filters }) {
+  const [selectedJob, setSelectedJob] = useState(() => {
+    return localStorage.getItem("selectedJob") || null;
+  });
 
-function JobList({
-  selectedCategory,
-  search,
-}) {
-  const [
-    selectedJob,
-    setSelectedJob,
-  ] = useState(null);
+  const [allJobs, setAllJobs] = useState([]);
 
-  const localJobs =
-    JSON.parse(
-      localStorage.getItem(
-        "jobs"
-      )
-    ) || [];
+useEffect(() => {
+  setSelectedJob(null);
+  localStorage.removeItem("selectedJob");
+}, [selectedCategory]);
 
-  const allJobs = [
-    ...jobsData,
-    ...localJobs,
-  ];
+  useEffect(() => {
+    if (selectedJob) {
+      localStorage.setItem("selectedJob", selectedJob);
+    } else {
+      localStorage.removeItem("selectedJob");
+    }
+  }, [selectedJob]);
 
+  // Загрузка данных из Supabase
+  useEffect(() => {
+    async function loadJobs() {
+      const { data, error } = await supabase.from("jobs").select("*");
+      if (!error) {
+        setAllJobs(data);
+      }
+    }
+    loadJobs();
+  }, []);
+
+  // // ПОИСК (дальше ваш код без изменений...)
+
+  // ПОИСК
   const filteredSearch =
     allJobs.filter((job) => {
       const value =
         search.toLowerCase();
 
       return (
-        job.title
+        (job.title || "")
           .toLowerCase()
           .includes(value) ||
-
-        job.company
+        (job.company || "")
           .toLowerCase()
           .includes(value) ||
-
-        job.city
+        (job.city || "")
           .toLowerCase()
           .includes(value) ||
-
-        job.category
+        (job.category || "")
           .toLowerCase()
           .includes(value) ||
-
-        job.specialization
+        (job.specialization || "")
           .toLowerCase()
           .includes(value)
       );
     });
 
+ const filteredJobs =
+  allJobs.filter((job) => {
+    // Категория
+    // Если выбрана специализация
+if (selectedJob) {
   if (
-    search.trim() !== ""
+    job.specialization !==
+    selectedJob
   ) {
-    return (
-      <div className={styles.cards}>
-        <h2>
-          Результаты поиска
-        </h2>
-
-        {filteredSearch.length >
-        0 ? (
-          filteredSearch.map(
-            (job) => (
-              <JobCard
-                key={job.id}
-                job={job}
-              />
-            )
-          )
-        ) : (
-          <p
-            className={
-              styles.noJobs
-            }
-          >
-            Ничего не найдено
-          </p>
-        )}
-      </div>
-    );
+    return false;
   }
-
-  if (!selectedCategory) {
-    return (
-      <div className={styles.empty}>
-        <h2>
-          Выберите категорию
-        </h2>
-
-        <p>
-          Сначала выберите
-          категорию работы
-        </p>
-      </div>
-    );
+}
+// Если выбрана только категория
+else if (selectedCategory) {
+  if (
+    !selectedCategory.jobs.includes(
+      job.specialization
+    )
+  ) {
+    return false;
   }
+}
+
+    // Поиск
+
+    if (
+      search.trim() !== ""
+    ) {
+      const value =
+        search.toLowerCase();
+
+      const found =
+        (job.title || "")
+          .toLowerCase()
+          .includes(value) ||
+        (job.company || "")
+          .toLowerCase()
+          .includes(value) ||
+        (job.city || "")
+          .toLowerCase()
+          .includes(value) ||
+        (job.category || "")
+          .toLowerCase()
+          .includes(value) ||
+        (
+          job.specialization ||
+          ""
+        )
+          .toLowerCase()
+          .includes(value);
+
+      if (!found)
+        return false;
+    }
+
+    // Зарплата
+
+    const salaryParts =
+      (job.salary || "")
+        .replace(/\s/g, "")
+        .split("-");
+
+    const salaryFromJob =
+      Number(
+        salaryParts[0]
+      ) || 0;
+
+    const salaryToJob =
+      Number(
+        salaryParts[1]
+      ) ||
+      salaryFromJob;
+
+    if (
+      filters.salaryFrom &&
+      salaryToJob <
+        Number(
+          filters.salaryFrom
+        )
+    )
+      return false;
+
+    if (
+      filters.salaryTo &&
+      salaryFromJob >
+        Number(
+          filters.salaryTo
+        )
+    )
+      return false;
+
+    // Город
+
+    if (
+      filters.city !==
+        "Все города" &&
+      job.city !==
+        filters.city
+    )
+      return false;
+
+    // Опыт
+
+    if (
+      filters.experience !==
+        "Любой" &&
+      job.experience !==
+        filters.experience
+    )
+      return false;
+
+    // График
+
+    if (
+      filters.schedule !==
+        "Любой" &&
+      job.schedule !==
+        filters.schedule
+    )
+      return false;
+
+    return true;
+  });
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.categoryTop}>
-        <h2>
-          {selectedCategory.title}
-        </h2>
-
-        <p>
-          Выберите
-          специализацию
-        </p>
-      </div>
-
-      <div className={styles.jobsGrid}>
-        {selectedCategory.jobs.map(
-          (
-            job,
-            index
-          ) => (
-            <button
-              key={index}
-              className={`${styles.jobBtn} ${
-                selectedJob ===
-                job
-                  ? styles.active
-                  : ""
-              }`}
-              onClick={() =>
-                setSelectedJob(
-                  job
-                )
+      {selectedCategory && (
+        <>
+          <div
+            className={
+              styles.categoryTop
+            }
+          >
+            <h2>
+              {
+                selectedCategory.title
               }
-            >
-              {job}
-            </button>
-          )
-        )}
-      </div>
+            </h2>
 
-      {selectedJob && (
-        <div
-          className={
-            styles.cards
-          }
-        >
+            <p>
+              Выберите
+              специализацию
+            </p>
+          </div>
+
+          <div
+            className={
+              styles.jobsGrid
+            }
+          >
+            {selectedCategory.jobs.map(
+              (
+                job,
+                index
+              ) => (
+                <button
+                  key={index}
+                  className={`${styles.jobBtn} ${
+                    selectedJob ===
+                    job
+                      ? styles.active
+                      : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedJob(job);
+                  }}             
+                >
+                  {job}
+                </button>
+              )
+            )}
+          </div>
+        </>
+      )}
+
+      <div
+        className={
+          styles.cards
+        }
+      >
+        {selectedJob && (
           <h3>
             Вакансии:
             <span>
@@ -155,39 +250,32 @@ function JobList({
               }
             </span>
           </h3>
+        )}
 
-          {allJobs
-            .filter(
-              (job) =>
-                job.specialization ===
-                selectedJob
-            )
-            .map((job) => (
-              <JobCard
-                key={job.id}
-                job={job}
-              />
-            ))}
+        {filteredJobs.map(
+          (job) => (
+            <JobCard
+              key={job.id}
+              job={job}
+            />
+          )
+        )}
 
-          {allJobs.filter(
-            (job) =>
-              job.specialization ===
-              selectedJob
-          ).length ===
-            0 && (
-            <p
-              className={
-                styles.noJobs
-              }
-            >
-              Пока вакансий
-              нет
-            </p>
-          )}
-        </div>
-      )}
+        {filteredJobs.length ===
+          0 && (
+          <p
+            className={
+              styles.noJobs
+            }
+          >
+            Пока вакансий
+            нет
+          </p>
+        )}
+      </div>
     </div>
   );
 }
+
 
 export default JobList;

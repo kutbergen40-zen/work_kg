@@ -1,8 +1,11 @@
 import { useState } from "react";
-
-import { Link } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+} from "react-router-dom";
 
 import styles from "./Header.module.css";
+import { useAuth } from "../../../hooks/useAuth";
 
 import {
   FaBars,
@@ -14,67 +17,143 @@ function Header() {
   const [menuOpen, setMenuOpen] =
     useState(false);
 
+  const { user } = useAuth();
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {/* LOGO */}
         <Link
           to="/"
           className={styles.logo}
         >
           Work
-          <span className={styles.kg}>KG</span>
+          <span className={styles.kg}>
+            KG
+          </span>
         </Link>
 
-        {/* DESKTOP NAV */}
         <nav className={styles.nav}>
-          <Link to="/">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? styles.activeLink
+                : ""
+            }
+          >
             Главная
-          </Link>
+          </NavLink>
 
-          <Link to="/jobs">
+          <NavLink
+            to="/jobs"
+            className={({ isActive }) =>
+              isActive
+                ? styles.activeLink
+                : ""
+            }
+          >
             Вакансии
-          </Link>
+          </NavLink>
 
-          <Link to="/add-job">
+          <NavLink
+            to="/add-job"
+            className={({ isActive }) =>
+              isActive
+                ? styles.activeLink
+                : ""
+            }
+          >
             Добавить вакансию
-          </Link>
+          </NavLink>
 
-          <Link to="/favorites">
+          <NavLink
+            to="/favorites"
+            className={({ isActive }) =>
+              isActive
+                ? styles.activeLink
+                : ""
+            }
+          >
             Избранное
-          </Link>
+          </NavLink>
 
-          <Link to="/my-jobs">
-             Мои вакансии
-          </Link>
+          <NavLink
+            to="/my-jobs"
+            className={({ isActive }) =>
+              isActive
+                ? styles.activeLink
+                : ""
+            }
+          >
+            Мои вакансии
+          </NavLink>
 
-          <Link to="/my-responses">
-             Мои отклики
-          </Link>
+          <NavLink
+            to="/my-responses"
+            className={({ isActive }) =>
+              isActive
+                ? styles.activeLink
+                : ""
+            }
+          >
+            Мои отклики
+          </NavLink>
 
-          <Link to="/login">
-            Войти
-          </Link>
-          
-          <Link to="/register">
-            Регистрация
-          </Link>
+          {!user && (
+            <>
+              <NavLink
+                to="/login"
+                className={({
+                  isActive,
+                }) =>
+                  isActive
+                    ? styles.activeLink
+                    : ""
+                }
+              >
+                Войти
+              </NavLink>
+
+              <NavLink
+                to="/register"
+                className={({
+                  isActive,
+                }) =>
+                  isActive
+                    ? styles.activeLink
+                    : ""
+                }
+              >
+                Регистрация
+              </NavLink>
+            </>
+          )}
         </nav>
 
-        {/* ACTIONS */}
         <div className={styles.actions}>
-          <Link
+          <NavLink
             to="/profile"
-            className={styles.profileBtn}
+            className={({
+              isActive,
+            }) =>
+              `${styles.profileBtn} ${
+                isActive
+                  ? styles.profileActive
+                  : ""
+              }`
+            }
           >
             <FaUser />
-          </Link>
+          </NavLink>
 
-          {/* BURGER */}
           <button
-            className={styles.burger}
+            className={
+              styles.burger
+            }
             onClick={() =>
-              setMenuOpen(!menuOpen)
+              setMenuOpen(
+                !menuOpen
+              )
             }
           >
             {menuOpen ? (
@@ -86,7 +165,6 @@ function Header() {
         </div>
       </div>
 
-      {/* MOBILE MENU */}
       <div
         className={`${styles.mobileMenu} ${
           menuOpen
@@ -94,67 +172,140 @@ function Header() {
             : ""
         }`}
       >
-        <Link
+        <NavLink
           to="/"
+          className={({ isActive }) =>
+            isActive
+              ? styles.activeLink
+              : ""
+          }
           onClick={() =>
             setMenuOpen(false)
           }
         >
           Главная
-        </Link>
+        </NavLink>
 
-        <Link
+        <NavLink
           to="/jobs"
+          className={({ isActive }) =>
+            isActive
+              ? styles.activeLink
+              : ""
+          }
           onClick={() =>
             setMenuOpen(false)
           }
         >
           Вакансии
-        </Link>
+        </NavLink>
 
-        <Link
+        <NavLink
           to="/add-job"
+          className={({ isActive }) =>
+            isActive
+              ? styles.activeLink
+              : ""
+          }
           onClick={() =>
             setMenuOpen(false)
           }
         >
           Добавить вакансию
-        </Link>
+        </NavLink>
 
-        <Link
+        <NavLink
           to="/favorites"
+          className={({ isActive }) =>
+            isActive
+              ? styles.activeLink
+              : ""
+          }
           onClick={() =>
             setMenuOpen(false)
           }
         >
           Избранное
-        </Link>
+        </NavLink>
 
-        <Link
-          to="/profile"
+        <NavLink
+          to="/my-jobs"
+          className={({ isActive }) =>
+            isActive
+              ? styles.activeLink
+              : ""
+          }
           onClick={() =>
             setMenuOpen(false)
           }
         >
-          Профиль
-        </Link>
-        <Link
-  to="/login"
-  onClick={() =>
-    setMenuOpen(false)
-  }
->
-  Войти
-</Link>
+          Мои вакансии
+        </NavLink>
 
-<Link
-  to="/register"
-  onClick={() =>
-    setMenuOpen(false)
-  }
->
-  Регистрация
-</Link>
+        <NavLink
+          to="/my-responses"
+          className={({ isActive }) =>
+            isActive
+              ? styles.activeLink
+              : ""
+          }
+          onClick={() =>
+            setMenuOpen(false)
+          }
+        >
+          Мои отклики
+        </NavLink>
+
+        {user ? (
+          <NavLink
+            to="/profile"
+            className={({
+              isActive,
+            }) =>
+              isActive
+                ? styles.activeLink
+                : ""
+            }
+            onClick={() =>
+              setMenuOpen(false)
+            }
+          >
+          </NavLink>
+        ) : (
+          <>
+            <NavLink
+              to="/login"
+              className={({
+                isActive,
+              }) =>
+                isActive
+                  ? styles.activeLink
+                  : ""
+              }
+              onClick={() =>
+                setMenuOpen(false)
+              }
+            >
+              Войти
+            </NavLink>
+
+            <NavLink
+              to="/register"
+              className={({
+                isActive,
+              }) =>
+                isActive
+                  ? styles.activeLink
+                  : ""
+              }
+              onClick={() =>
+                setMenuOpen(false)
+              }
+            >
+              Регистрация
+            </NavLink>
+          </>
+        )}
       </div>
     </header>
   );

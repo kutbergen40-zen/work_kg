@@ -2,6 +2,8 @@ import styles from "./JobCard.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import ApplyModal from "../ApplyModal/ApplyModal";
+import { useAuth } from "../../../hooks/useAuth";
+import { supabase } from "../../../lib/supabase";
 import {
   addFavorite,
   removeFavorite,
@@ -21,37 +23,47 @@ function JobCard({
   showDelete,
   onDelete,
 }) {
+  const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] =
   useState(false);
 
-const handleApply = (
+const handleApply = async (
   response
 ) => {
-  const responses =
-    JSON.parse(
-      localStorage.getItem(
-        "responses"
-      )
-    ) || [];
+  if (!user) {
+    alert("Войдите в аккаунт");
+    return;
+  }
 
-  responses.push({
-    jobId: job.id,
+  const { error } =
+    await supabase
+      .from("responses")
+      .insert([
+        {
+          user_id: user.id,
 
-    jobTitle:
-      job.title,
+          job_id: job.id,
 
-    company:
-      job.company,
+          job_title: job.title,
 
-    ...response,
-  });
+          company: job.company,
 
-  localStorage.setItem(
-    "responses",
-    JSON.stringify(
-      responses
-    )
-  );
+          full_name:
+            response.fullName,
+
+          phone:
+            response.phone,
+
+          message:
+            response.message,
+        },
+      ]);
+
+  if (error) {
+    console.log(error);
+    alert("Ошибка");
+    return;
+  }
 
   alert(
     "Отклик отправлен!"
@@ -67,18 +79,9 @@ const handleApply = (
     )
   );
 
-  const myJobs =
-  JSON.parse(
-    localStorage.getItem(
-      "jobs"
-    )
-  ) || [];
-
 const isMyJob =
-  myJobs.some(
-    (item) =>
-      item.id === job.id
-  );
+  user &&
+  job.user_id === user.id;
 
   const handleFavorite = () => {
   if (favorite) {

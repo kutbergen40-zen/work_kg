@@ -46,3 +46,63 @@
 
   font-size: 15px;
 }
+
+.applyBtn {
+  width: 100%;
+
+  margin-top: 20px;
+
+  height: 48px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: var(
+    --primary-color
+  );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.applyBtn:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.resetBtn {
+  width: 100%;
+
+  margin-top: 10px;
+  padding: 14px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #f3f4f6;
+  color: #111827;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.resetBtn:hover {
+  background: red;
+}

@@ -1,34 +1,73 @@
+import { useEffect, useState } from "react";
+
 import Breadcrumbs from "../../components/ui/Breadcrumbs/Breadcrumbs";
 import BackButton from "../../components/ui/BackButton/BackButton";
 import styles from "./MyResponses.module.css";
 
+import { supabase } from "../../lib/supabase";
+import { useAuth } from "../../hooks/useAuth";
+
 function MyResponses() {
-  const responses =
-    JSON.parse(
-      localStorage.getItem(
-        "responses"
+  const { user } = useAuth();
+
+  const [responses, setResponses] =
+    useState([]);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  useEffect(() => {
+    loadResponses();
+  }, [user]);
+
+  async function loadResponses() {
+    if (!user) return;
+
+    const { data, error } =
+      await supabase
+        .from("responses")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", {
+          ascending: false,
+        });
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setResponses(data);
+    setLoading(false);
+  }
+
+  async function handleDelete(id) {
+    const { error } =
+      await supabase
+        .from("responses")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setResponses(
+      responses.filter(
+        (item) => item.id !== id
       )
-    ) || [];
-
-    const handleDelete = (index) => {
-  const updatedResponses =
-    responses.filter(
-      (_, i) => i !== index
     );
+  }
 
-  localStorage.setItem(
-    "responses",
-    JSON.stringify(
-      updatedResponses
-    )
-  );
-
-  window.location.reload();
-};
+  if (loading) {
+    return <p>Загрузка...</p>;
+  }
 
   return (
     <div className={styles.container}>
       <BackButton />
+
       <Breadcrumbs
         items={[
           "Главная",
@@ -47,23 +86,18 @@ function MyResponses() {
         </p>
       ) : (
         responses.map(
-          (
-            response,
-            index
-          ) => (
-           <div
-              key={index}
+          (response) => (
+            <div
+              key={response.id}
               className={styles.card}
             >
               <h3 className={styles.jobTitle}>
-                {response.jobTitle}
+                {response.job_title}
               </h3>
 
               <p className={styles.company}>
                 Компания:
-                {
-                  response.company
-                }
+                {response.company}
               </p>
 
               <p className={styles.info}>
@@ -73,28 +107,38 @@ function MyResponses() {
 
               <p className={styles.info}>
                 Телефон:
-                {
-                  response.phone
-                }
+                {response.phone}
               </p>
 
-              <div className={styles.message}>
+              <div
+                className={
+                  styles.message
+                }
+              >
                 <strong>
                   Сообщение:
                 </strong>
-              
+
                 <p>
-                  {response.message}
+                  {
+                    response.message
+                  }
                 </p>
               </div>
+
               <button
-  onClick={() =>
-    handleDelete(index)
-  }
-  className={styles.deleteBtn}
->
-  Удалить отклик
-</button>
+                onClick={() =>
+                  handleDelete(
+                    response.id
+                  )
+                }
+                className={
+                  styles.deleteBtn
+                }
+              >
+                Удалить
+                отклик
+              </button>
             </div>
           )
         )
