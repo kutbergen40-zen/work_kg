@@ -9,7 +9,7 @@ import MyResponses from "./pages/MyResponses/MyResponses";
 import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Favorites from "./pages/Favorites/Favorites";
-import Applications from "./pages/Applications/Applications";
+import Applications from "./pages/AppLications/AppLications";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import PrivateRoute from "./components/common/PrivateRoute/PrivateRoute";

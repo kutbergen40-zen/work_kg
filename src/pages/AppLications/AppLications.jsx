@@ -1,4 +1,4 @@
-import styles from "./Applications.module.css";
+import styles from "./AppLications.module.css";
 
 function Applications() {
   return (
