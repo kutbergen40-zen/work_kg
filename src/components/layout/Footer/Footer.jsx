@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "./Footer.module.css";
 
 import { Link } from "react-router-dom";
@@ -12,6 +13,8 @@ import {
 } from "react-icons/fa";
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -22,9 +25,7 @@ function Footer() {
           </h2>
 
           <p className={styles.description}>
-            Современная платформа
-            поиска работы и сотрудников
-            по всему Кыргызстану.
+            {t("footer.about")}
           </p>
 
           <div className={styles.socials}>
@@ -44,42 +45,42 @@ function Footer() {
 
         {/* COLUMN 2 */}
         <div className={styles.column}>
-          <h3>Навигация</h3>
+          <h3>{t("nav.home")}</h3>
 
           <div className={styles.links}>
             <Link to="/">
-              Главная
+              {t("nav.home")}
             </Link>
 
             <Link to="/jobs">
-              Вакансии
+              {t("nav.jobs")}
             </Link>
 
             <Link to="/add-job">
-              Добавить вакансию
+              {t("nav.addJob")}
             </Link>
 
             <Link to="/favorites">
-              Избранное
+              {t("nav.favorites")}
             </Link>
 
             <Link to="/my-jobs">
-              Мои вакансии
+              {t("nav.myJobs")}
             </Link>
 
             <Link to="/my-responses">
-              Мои отклики
+              {t("nav.myResponses")}
             </Link>
 
             <Link to="/profile">
-              Профиль
+              {t("nav.profile")}
             </Link>
           </div>
         </div>
 
         {/* COLUMN 3 */}
         <div className={styles.column}>
-          <h3>Контакты</h3>
+          <h3>{t("footer.contact")}</h3>
 
           <div className={styles.contacts}>
             <p>

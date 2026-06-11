@@ -3,9 +3,11 @@ import {
   Link,
   NavLink,
 } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import styles from "./Header.module.css";
 import { useAuth } from "../../../hooks/useAuth";
+import LanguageDropdown from "../../common/LanguageDropdown/LanguageDropdown";
 
 import {
   FaBars,
@@ -16,6 +18,7 @@ import {
 function Header() {
   const [menuOpen, setMenuOpen] =
     useState(false);
+  const { t } = useTranslation();
 
   const { user } = useAuth();
 
@@ -41,7 +44,7 @@ function Header() {
                 : ""
             }
           >
-            Главная
+            {t("nav.home")}
           </NavLink>
 
           <NavLink
@@ -52,7 +55,7 @@ function Header() {
                 : ""
             }
           >
-            Вакансии
+            {t("nav.jobs")}
           </NavLink>
 
           <NavLink
@@ -63,7 +66,7 @@ function Header() {
                 : ""
             }
           >
-            Добавить вакансию
+            {t("nav.addJob")}
           </NavLink>
 
           <NavLink
@@ -74,7 +77,7 @@ function Header() {
                 : ""
             }
           >
-            Избранное
+            {t("nav.favorites")}
           </NavLink>
 
           <NavLink
@@ -85,7 +88,7 @@ function Header() {
                 : ""
             }
           >
-            Мои вакансии
+            {t("nav.myJobs")}
           </NavLink>
 
           <NavLink
@@ -96,7 +99,7 @@ function Header() {
                 : ""
             }
           >
-            Мои отклики
+            {t("nav.myResponses")}
           </NavLink>
 
           {!user && (
@@ -111,7 +114,7 @@ function Header() {
                     : ""
                 }
               >
-                Войти
+                {t("nav.login")}
               </NavLink>
 
               <NavLink
@@ -124,13 +127,15 @@ function Header() {
                     : ""
                 }
               >
-                Регистрация
+                {t("nav.register")}
               </NavLink>
             </>
           )}
         </nav>
 
         <div className={styles.actions}>
+          <LanguageDropdown />
+
           <NavLink
             to="/profile"
             className={({
@@ -183,7 +188,7 @@ function Header() {
             setMenuOpen(false)
           }
         >
-          Главная
+          {t("nav.home")}
         </NavLink>
 
         <NavLink
@@ -197,7 +202,7 @@ function Header() {
             setMenuOpen(false)
           }
         >
-          Вакансии
+          {t("nav.jobs")}
         </NavLink>
 
         <NavLink
@@ -211,7 +216,7 @@ function Header() {
             setMenuOpen(false)
           }
         >
-          Добавить вакансию
+          {t("nav.addJob")}
         </NavLink>
 
         <NavLink
@@ -225,7 +230,7 @@ function Header() {
             setMenuOpen(false)
           }
         >
-          Избранное
+          {t("nav.favorites")}
         </NavLink>
 
         <NavLink
@@ -239,7 +244,7 @@ function Header() {
             setMenuOpen(false)
           }
         >
-          Мои вакансии
+          {t("nav.myJobs")}
         </NavLink>
 
         <NavLink
@@ -253,7 +258,7 @@ function Header() {
             setMenuOpen(false)
           }
         >
-          Мои отклики
+          {t("nav.myResponses")}
         </NavLink>
 
         {user ? (
@@ -286,7 +291,7 @@ function Header() {
                 setMenuOpen(false)
               }
             >
-              Войти
+              {t("nav.login")}
             </NavLink>
 
             <NavLink
@@ -302,7 +307,7 @@ function Header() {
                 setMenuOpen(false)
               }
             >
-              Регистрация
+              {t("nav.register")}
             </NavLink>
           </>
         )}

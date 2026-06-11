@@ -1,6 +1,7 @@
 import styles from "./JobCard.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import ApplyModal from "../ApplyModal/ApplyModal";
 import { useAuth } from "../../../hooks/useAuth";
 import { supabase } from "../../../lib/supabase";
@@ -23,6 +24,7 @@ function JobCard({
   showDelete,
   onDelete,
 }) {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] =
   useState(false);
@@ -31,7 +33,7 @@ const handleApply = async (
   response
 ) => {
   if (!user) {
-    alert("Войдите в аккаунт");
+    alert(t("common.error"));
     return;
   }
 
@@ -61,12 +63,12 @@ const handleApply = async (
 
   if (error) {
     console.log(error);
-    alert("Ошибка");
+    alert(t("common.error"));
     return;
   }
 
   alert(
-    "Отклик отправлен!"
+    t("jobs.applied")
   );
 
   setIsModalOpen(false);
@@ -178,7 +180,7 @@ const isMyJob =
       {/* BUTTONS */}
       <div className={styles.actions}>
         <Link to={`/job-details/${job.id}`}>
-          Подробнее
+          {t("jobs.details")}
         </Link>
 
         <button
@@ -188,8 +190,8 @@ const isMyJob =
            }
          >
            {isMyJob
-             ? "Ваша вакансия"
-             : "Откликнуться"}
+             ? t("jobs.applied")
+             : t("jobs.apply")}
          </button>
         <ApplyModal
            isOpen={isModalOpen}

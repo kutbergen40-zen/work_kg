@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "home": "Home",
+    "jobs": "Jobs",
+    "addJob": "Post a Job",
+    "favorites": "Favorites",
+    "myJobs": "My Jobs",
+    "myResponses": "My Responses",
+    "applications": "My Responses",
+    "login": "Sign In",
+    "register": "Sign Up",
+    "profile": "Profile",
+    "logout": "Sign Out",
+    "aboutUs": "About Us"
+  },
+  "header": {
+    "logo": "WorkKG"
+  },
+  "language": {
+    "ru": "Русский",
+    "ky": "Кыргызча",
+    "en": "English"
+  },
+  "common": {
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "noData": "No data",
+    "required": "This field is required",
+    "name": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Submit"
+  },
+  "jobs": {
+    "title": "Jobs",
+    "salary": "Salary",
+    "company": "Company",
+    "location": "Location",
+    "category": "Category",
+    "experience": "Experience",
+    "posted": "Posted",
+    "apply": "Apply Now",
+    "applied": "You applied",
+    "favorite": "Add to Favorites",
+    "unfavorite": "Remove from Favorites",
+    "details": "Details",
+    "description": "Description",
+    "requirements": "Requirements",
+    "addNew": "Post a New Job",
+    "edit": "Edit Job",
+    "delete": "Delete Job",
+    "deleted": "Job deleted",
+    "created": "Job created",
+    "updated": "Job updated"
+  },
+  "auth": {
+    "loginTitle": "Sign In",
+    "registerTitle": "Sign Up",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "enterName": "Enter your full name",
+    "enterPhone": "Enter phone number",
+    "loginButton": "Sign In",
+    "registerButton": "Sign Up",
+    "haveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "loginSuccess": "You have successfully signed in",
+    "registerSuccess": "You have successfully signed up",
+    "invalidEmail": "Invalid email address",
+    "passwordMismatch": "Passwords do not match",
+    "loginError": "Login error",
+    "registerError": "Registration error"
+  },
+  "profile": {
+    "title": "Profile",
+    "editProfile": "Edit Profile",
+    "personalInfo": "Personal Information",
+    "skills": "Skills",
+    "experience": "Experience",
+    "education": "Education",
+    "about": "About Me",
+    "avatar": "Profile Photo",
+    "uploadPhoto": "Upload Photo",
+    "changePassword": "Change Password",
+    "logout": "Sign Out",
+    "saved": "Changes saved"
+  },
+  "pages": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "notFound": "Page not found",
+    "favorites": "Favorite Jobs",
+    "myJobs": "My Jobs",
+    "myResponses": "My Responses",
+    "applications": "My Responses"
+  },
+  "home": {
+    "title": "Find Your Perfect Job",
+    "description": "Looking for a job in Kyrgyzstan? WorkKG helps you find the best vacancies",
+    "searchPlaceholder": "Search for jobs...",
+    "popularJobs": "Popular Jobs"
+  },
+  "footer": {
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms of Use",
+    "copyright": "© 2024 WorkKG. All rights reserved."
+  },
+  "modal": {
+    "apply": "Apply for Job",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "message": "Message (optional)",
+    "submit": "Submit Application",
+    "cancel": "Cancel"
+  }
+}

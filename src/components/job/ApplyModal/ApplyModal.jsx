@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "./ApplyModal.module.css";
 
 function ApplyModal({
@@ -5,13 +6,15 @@ function ApplyModal({
   onClose,
   onSubmit,
 }) {
+  const { t } = useTranslation();
+
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const response = {
-      name: e.target.name.value,
+      fullName: e.target.fullName.value,
       phone: e.target.phone.value,
       message:
         e.target.message.value,
@@ -23,37 +26,37 @@ function ApplyModal({
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h2>Отклик на вакансию</h2>
+        <h2>{t("modal.apply")}</h2>
 
         <form onSubmit={handleSubmit}>
           <input
-            name="name"
-            placeholder="Ваше имя"
+            name="fullName"
+            placeholder={t("modal.fullName")}
             required
           />
 
           <input
             name="phone"
-            placeholder="Телефон"
+            placeholder={t("modal.phone")}
             required
           />
 
           <textarea
             name="message"
-            placeholder="Сообщение работодателю"
+            placeholder={t("modal.message")}
             rows="5"
           />
 
           <div className={styles.actions}>
             <button type="submit">
-              Отправить
+              {t("modal.submit")}
             </button>
 
             <button
               type="button"
               onClick={onClose}
             >
-              Закрыть
+              {t("modal.cancel")}
             </button>
           </div>
         </form>
