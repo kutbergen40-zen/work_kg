@@ -8,7 +8,24 @@
   --text-color: #111827;
   --gray-color: #6b7280;
 
+  --card-color: #ffffff;
+  --border-color: #e5e7eb;
+
   --border-radius: 10px;
 
   --transition: 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --background-color: #111827;
+
+  --white-color: #1f2937;
+
+  --text-color: #f9fafb;
+
+  --gray-color: #9ca3af;
+
+  --card-color: #1f2937;
+
+  --border-color: #374151;
 }

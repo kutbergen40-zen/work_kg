@@ -523,7 +523,7 @@ const { user } = useAuth();
           className={styles.form}
           onSubmit={handleSubmit}
         >
-          {/* TITLE */}
+        
           <div className={styles.group}>
             <label>
               Название вакансии
@@ -540,7 +540,6 @@ const { user } = useAuth();
             />
           </div>
 
-          {/* COMPANY */}
           <div className={styles.group}>
             <label>
               Компания
@@ -559,7 +558,6 @@ const { user } = useAuth();
             />
           </div>
 
-          {/* SALARY */}
           <div className={styles.row}>
             <div className={styles.group}>
               <label>
@@ -598,7 +596,6 @@ const { user } = useAuth();
             </div>
           </div>
 
-          {/* CITY */}
           <div className={styles.group}>
             <label>Город</label>
 
@@ -642,7 +639,6 @@ const { user } = useAuth();
             </select>
           </div>
 
-          {/* CATEGORY */}
           <div className={styles.row}>
             <div className={styles.group}>
               <label>
@@ -691,7 +687,6 @@ const { user } = useAuth();
               </select>
             </div>
 
-            {/* SPECIALIZATION */}
             <div className={styles.group}>
               <label>
                 Специализация
@@ -735,7 +730,6 @@ const { user } = useAuth();
             </div>
           </div>
 
-          {/* SCHEDULE */}
           <div className={styles.row}>
             <div className={styles.group}>
               <label>
@@ -802,7 +796,6 @@ const { user } = useAuth();
             />
           </div>
 
-          {/* RESPONSIBILITIES */}
           <div className={styles.group}>
             <label>
               Обязанности
@@ -821,7 +814,6 @@ const { user } = useAuth();
             />
           </div>
 
-          {/* REQUIREMENTS */}
           <div className={styles.group}>
             <label>
               Требования

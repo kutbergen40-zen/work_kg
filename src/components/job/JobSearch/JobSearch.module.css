@@ -201,3 +201,33 @@
     font-weight: 600;
   }
 }
+
+.inputBox {
+  position: relative;
+}
+
+.voiceBtn {
+  position: absolute;
+
+  right: 10px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #2563eb;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voiceBtn:hover {
+  opacity: 0.9;
+}

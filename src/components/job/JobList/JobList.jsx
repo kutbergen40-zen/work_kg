@@ -23,7 +23,6 @@ useEffect(() => {
     }
   }, [selectedJob]);
 
-  // Загрузка данных из Supabase
   useEffect(() => {
     async function loadJobs() {
       const { data, error } = await supabase.from("jobs").select("*");
@@ -34,9 +33,6 @@ useEffect(() => {
     loadJobs();
   }, []);
 
-  // // ПОИСК (дальше ваш код без изменений...)
-
-  // ПОИСК
   const filteredSearch =
     allJobs.filter((job) => {
       const value =
@@ -63,8 +59,6 @@ useEffect(() => {
 
  const filteredJobs =
   allJobs.filter((job) => {
-    // Категория
-    // Если выбрана специализация
 if (selectedJob) {
   if (
     job.specialization !==
@@ -73,7 +67,7 @@ if (selectedJob) {
     return false;
   }
 }
-// Если выбрана только категория
+
 else if (selectedCategory) {
   if (
     !selectedCategory.jobs.includes(
@@ -83,8 +77,6 @@ else if (selectedCategory) {
     return false;
   }
 }
-
-    // Поиск
 
     if (
       search.trim() !== ""
@@ -115,8 +107,6 @@ else if (selectedCategory) {
       if (!found)
         return false;
     }
-
-    // Зарплата
 
     const salaryParts =
       (job.salary || "")
@@ -152,8 +142,6 @@ else if (selectedCategory) {
     )
       return false;
 
-    // Город
-
     if (
       filters.city !==
         "Все города" &&
@@ -162,8 +150,6 @@ else if (selectedCategory) {
     )
       return false;
 
-    // Опыт
-
     if (
       filters.experience !==
         "Любой" &&
@@ -171,8 +157,6 @@ else if (selectedCategory) {
         filters.experience
     )
       return false;
-
-    // График
 
     if (
       filters.schedule !==

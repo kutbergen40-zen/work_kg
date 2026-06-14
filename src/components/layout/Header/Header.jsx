@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Link,
   NavLink,
@@ -13,6 +13,8 @@ import {
   FaBars,
   FaTimes,
   FaUser,
+  FaMoon,
+  FaSun,
 } from "react-icons/fa";
 
 function Header() {

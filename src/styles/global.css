@@ -38,7 +38,15 @@ input {
   font-family: inherit;
 }
 body {
-  overflow-x: hidden;
+ body {
+  font-family: Arial, sans-serif;
+
+  background-color: var(--background-color);
+
+  color: var(--text-color);
+
+  transition: 0.3s;
+}
 }
 
 img,

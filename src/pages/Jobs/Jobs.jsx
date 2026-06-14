@@ -595,7 +595,6 @@ useEffect(() => {
   {categories.map((category) => (
     <button
       key={category.id}
-      // Добавляем вот эту проверку для класса active:
       className={`${styles.categoryBtn} ${
         selectedCategory?.id === category.id ? styles.active : ""
       }`}
@@ -608,6 +607,19 @@ useEffect(() => {
     </button>
   ))}
 </div>
+
+{selectedCategory && (
+  <button
+    className={styles.resetBtn}
+    onClick={() => {
+      setSelectedCategory(null);
+      localStorage.removeItem("selectedCategory");
+      localStorage.removeItem("selectedJob");
+    }}
+  >
+    Сбросить категорию
+  </button>
+)}
 
         <div className={styles.content}>
   <JobFilter
