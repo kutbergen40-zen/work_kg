@@ -1,233 +1,141 @@
 .search {
   position: sticky;
-
   top: 90px;
-
   z-index: 999;
-
   width: 100%;
-
   background: white;
-
   border: 1px solid #e5e7eb;
-
   border-radius: 18px;
-
   padding: 10px;
-
   display: flex;
-
   gap: 10px;
-
   margin-bottom: 30px;
+  box-sizing: border-box;
 }
 
 .inputBox {
   flex: 1;
-
   display: flex;
-
   align-items: center;
-
   gap: 14px;
-
   background: #f9fafb;
-
   border-radius: 14px;
-
   padding: 0 18px;
+  position: relative; /* Важно для позиционирования микрофона */
 }
 
 .icon {
   color: #9ca3af;
-
   font-size: 18px;
-
   flex-shrink: 0;
 }
 
 .inputBox input {
   flex: 1;
-
   height: 52px;
-
   border: none;
-
   outline: none;
-
   background: transparent;
-
   font-size: 16px;
+  /* Отступ справа, чтобы текст гарантированно останавливался ДО микрофона */
+  padding-right: 50px !important; 
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.search button {
-  width: 140px;
-
+/* Общие базовые стили для главных кнопок справа */
+.searchBtn, .filterBtn {
   border: none;
-
   border-radius: 14px;
-
-  background: var(
-    --primary-color
-  );
-
+  background: #2563eb; /* Используем синий, если var(--primary-color) не задан */
   color: white;
-
   font-size: 16px;
-
   font-weight: 600;
-
   transition: 0.3s;
+  cursor: pointer;
 }
 
-.search button:hover {
+.searchBtn:hover, .filterBtn:hover {
   opacity: 0.9;
 }
 
+/* Кнопка Поиск (для ПК) */
+.searchBtn {
+  width: 140px;
+  display: block;
+}
+
+/* Кнопка Фильтр (для телефона) */
+.filterBtn {
+  width: 120px;
+  display: none; /* По умолчанию на ПК скрыта */
+}
+
+/* Кнопка голосового поиска (Микрофон) */
+.voiceBtn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  /* Делаем строго круглую кнопку */
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  
+  border: none !important;
+  background: #2563eb;
+  color: white;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 !important;
+  z-index: 10;
+}
+
+.voiceBtn:hover {
+  opacity: 0.9;
+}
+
+.voiceBtn svg {
+  font-size: 16px;
+}
+
+/* Адаптив под мобильные устройства (до 700px) */
 @media (max-width: 700px) {
   .search {
     top: 75px;
-
     padding: 8px;
-
     gap: 8px;
   }
 
   .inputBox {
     padding: 0 12px;
-
     gap: 10px;
   }
 
   .inputBox input {
     height: 44px;
-
     font-size: 14px;
+    padding-right: 45px !important; /* Отступ для текста на мобилках */
   }
 
-  .search button {
-    width: 90px;
-
-    font-size: 14px;
-  }
-}
-
-.filterBtn {
-  width: 100px;
-
-  border: none;
-
-  border-radius: 14px;
-
-  background: var(--primary-color);
-
-  color: white;
-
-  font-weight: 600;
-}
-
-@media (min-width: 701px) {
-  .filterBtn {
-    display: none;
-  }
-}
-
-.filterBtn {
-  display: none;
-}
-
-@media (max-width: 700px) {
-  .filterBtn {
-    display: block;
-
-    width: 90px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    background: var(--primary-color);
-
-    color: white;
-
-    font-size: 14px;
-
-    font-weight: 600;
-  }
-}
-
-.searchBtn {
-  width: 140px;
-
-  border: none;
-
-  border-radius: 14px;
-
-  background: var(--primary-color);
-
-  color: white;
-
-  font-size: 16px;
-
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-.filterBtn {
-  display: none;
-}
-
-@media (max-width: 700px) {
+  /* На телефонах скрываем "Поиск" и показываем "Фильтр" */
   .searchBtn {
-    display: none;
+    display: none !important;
   }
 
   .filterBtn {
-    display: block;
-
+    display: block !important;
     width: 90px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    background: var(--primary-color);
-
-    color: white;
-
     font-size: 14px;
-
-    font-weight: 600;
   }
-}
-
-.inputBox {
-  position: relative;
-}
-
-.voiceBtn {
-  position: absolute;
-
-  right: 10px;
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  width: 36px;
-  height: 36px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: #2563eb;
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.voiceBtn:hover {
-  opacity: 0.9;
+  
+  .voiceBtn {
+    width: 36px !important;
+    height: 36px !important;
+    right: 6px;
+  }
 }

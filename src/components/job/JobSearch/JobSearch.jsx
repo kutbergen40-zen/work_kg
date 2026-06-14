@@ -1,61 +1,38 @@
 import { useState } from "react";
 import styles from "./JobSearch.module.css";
-import {
-  FaSearch,
-  FaMicrophone,
-} from "react-icons/fa";
+import { FaSearch, FaMicrophone } from "react-icons/fa";
 
-function JobSearch({
-  search,
-  setSearch,
-  setShowFilter,
-}) {
+function JobSearch({ search, setSearch, setShowFilter }) {
+  const [listening, setListening] = useState(false);
 
-    const [listening, setListening] =
-  useState(false);
+  const startVoiceSearch = () => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const startVoiceSearch = () => {
-  const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Браузер не поддерживает голосовой поиск");
+      return;
+    }
 
-  if (!SpeechRecognition) {
-    alert(
-      "Браузер голосовой поискти колдобойт"
-    );
-    return;
-  }
+    const recognition = new SpeechRecognition();
+    recognition.lang = "ru-RU";
+    recognition.start();
+    setListening(true);
 
-  const recognition =
-    new SpeechRecognition();
-
-  recognition.lang = "ru-RU";
-
-  recognition.start();
-
-  setListening(true);
-
-  recognition.onresult = (
-    event
-  ) => {
-    const text =
-      event.results[0][0]
-        .transcript;
-
-    setSearch(text);
-
-    setListening(false);
-  };
-
-  recognition.onerror =
-    () => {
+    recognition.onresult = (event) => {
+      const text = event.results[0][0].transcript;
+      setSearch(text);
       setListening(false);
     };
 
-  recognition.onend = () => {
-    setListening(false);
+    recognition.onerror = () => {
+      setListening(false);
+    };
+
+    recognition.onend = () => {
+      setListening(false);
+    };
   };
-};
 
   return (
     <div className={styles.search}>
@@ -66,34 +43,30 @@ const startVoiceSearch = () => {
           type="text"
           placeholder="Поиск вакансий..."
           value={search}
-          onChange={(e) =>
-            setSearch(e.target.value)
-          }
+          onChange={(e) => setSearch(e.target.value)}
         />
-          <button
-    className={styles.voiceBtn}
-    onClick={
-      startVoiceSearch
-    }
-  >
-    <FaMicrophone />
-  </button>
 
+        <button
+          type="button"
+          className={styles.voiceBtn}
+          onClick={startVoiceSearch}
+          style={{ backgroundColor: listening ? "#ef4444" : "#2563eb" }} 
+          title="Голосовой поиск"
+        >
+          <FaMicrophone />
+        </button>
       </div>
 
-      {/* ноутбук */}
-      <button
-        className={styles.searchBtn}
-      >
+      {/* Кнопка для ПК */}
+      <button type="button" className={styles.searchBtn}>
         Поиск
       </button>
 
-      {/* телефон */}
+      {/* Кнопка для телефона */}
       <button
+        type="button"
         className={styles.filterBtn}
-        onClick={() =>
-          setShowFilter(true)
-        }
+        onClick={() => setShowFilter(true)}
       >
         Фильтр
       </button>
