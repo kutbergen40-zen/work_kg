@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./JobSearch.module.css";
-import { FaSearch, FaMicrophone } from "react-icons/fa";
+import { FaSearch, FaMicrophone, FaTimes, } from "react-icons/fa";
 
 function JobSearch({ search, setSearch, setShowFilter }) {
   const [listening, setListening] = useState(false);
@@ -45,6 +45,18 @@ function JobSearch({ search, setSearch, setShowFilter }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+
+        {search && (
+  <button
+    type="button"
+    className={styles.clearBtn}
+    onClick={() =>
+      setSearch("")
+    }
+  >
+    <FaTimes />
+  </button>
+)}
 
         <button
           type="button"

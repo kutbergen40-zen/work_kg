@@ -21,7 +21,7 @@
   background: #f9fafb;
   border-radius: 14px;
   padding: 0 18px;
-  position: relative; /* Важно для позиционирования микрофона */
+  position: relative;
 }
 
 .icon {
@@ -138,4 +138,32 @@
     height: 36px !important;
     right: 6px;
   }
+}
+
+.clearBtn {
+  position: absolute;
+
+  right: 52px;
+
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #9ca3af;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.clearBtn:hover {
+  color: #ef4444;
 }

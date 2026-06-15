@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
-
+import { useAuth } from "../../hooks/useAuth";
+import ApplyModal from "../../components/job/ApplyModal/ApplyModal";
+import { useTranslation } from "react-i18next";
 import styles from "./JobDetails.module.css";
 import Breadcrumbs from "../../components/ui/Breadcrumbs/Breadcrumbs";
 import BackButton from "../../components/ui/BackButton/BackButton";
@@ -21,6 +23,71 @@ function JobDetails() {
   const { id } = useParams();
 
   const [job, setJob] = useState(null);
+
+  const { user } = useAuth();
+
+const { t } = useTranslation();
+
+const [isModalOpen, setIsModalOpen] =
+  useState(false);
+
+const isMyJob =
+  user &&
+  job &&
+  job.user_id === user.id;
+
+const handleApply = async (
+  response
+) => {
+  if (!user) {
+    alert(
+      t("common.error")
+    );
+    return;
+  }
+
+  const { error } =
+    await supabase
+      .from("responses")
+      .insert([
+        {
+          user_id: user.id,
+
+          job_id: job.id,
+
+          job_title:
+            job.title,
+
+          company:
+            job.company,
+
+          full_name:
+            response.fullName,
+
+          phone:
+            response.phone,
+
+          message:
+            response.message,
+        },
+      ]);
+
+  if (error) {
+    console.log(error);
+
+    alert(
+      t("common.error")
+    );
+
+    return;
+  }
+
+  alert(
+    t("jobs.applied")
+  );
+
+  setIsModalOpen(false);
+};
 
   useEffect(() => {
     loadJob();
@@ -131,29 +198,44 @@ function JobDetails() {
               <h3>Контакты</h3>
 
               {job.phone && (
-                <a href="/">
+                <a href={`tel:${job.phone}`}>
                   <FaPhoneAlt />
                   {job.phone}
                 </a>
               )}
 
               {job.whatsapp && (
-                <a href="/">
+                <a href={`https://wa.me/${job.whatsapp}`}>
                   <FaWhatsapp />
                   {job.whatsapp}
                 </a>
               )}
 
               {job.telegram && (
-                <a href="/">
+                <a href={`https://t.me/${job.telegram}`}>
                   <FaTelegramPlane />
                   {job.telegram}
                 </a>
               )}
 
-              <button>
-                Откликнуться
-              </button>
+             <button
+  disabled={isMyJob}
+  onClick={() =>
+    setIsModalOpen(true)
+  }
+>
+  {isMyJob
+    ? t("jobs.applied")
+    : t("jobs.apply")}
+</button>
+
+<ApplyModal
+  isOpen={isModalOpen}
+  onClose={() =>
+    setIsModalOpen(false)
+  }
+  onSubmit={handleApply}
+/>
             </div>
 
             <div className={styles.companyCard}>
